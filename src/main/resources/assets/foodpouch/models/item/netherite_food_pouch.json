@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "foodpouch:item/food_pouch",
+    "layer1": "foodpouch:item/netherite_food_pouch_overlay"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "foodpouch:eating": 1
+      },
+      "model": "foodpouch:item/netherite_food_pouch_eating"
+    }
+  ]
+}

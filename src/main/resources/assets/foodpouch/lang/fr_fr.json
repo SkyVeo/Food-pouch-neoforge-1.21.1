@@ -1,0 +1,9 @@
+{
+  "item.foodpouch.food_pouch": "Sac de nourriture",
+  "item.foodpouch.iron_food_pouch": "Sac de nourriture en fer",
+  "item.foodpouch.gold_food_pouch": "Sac de nourriture doré",
+  "item.foodpouch.diamond_food_pouch": "Sac de nourriture en diamant",
+  "item.foodpouch.netherite_food_pouch": "Sac de nourriture en Netherite",
+
+  "item.food_pouch.empty.description": "Peut contenir jusqu'à %s objets consommables"
+}

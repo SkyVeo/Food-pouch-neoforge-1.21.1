@@ -1,0 +1,9 @@
+{
+  "item.foodpouch.food_pouch": "Food Pouch",
+  "item.foodpouch.iron_food_pouch": "Iron Food Pouch",
+  "item.foodpouch.golden_food_pouch": "Golden Food Pouch",
+  "item.foodpouch.diamond_food_pouch": "Diamond Food Pouch",
+  "item.foodpouch.netherite_food_pouch": "Netherite Food Pouch",
+
+  "item.food_pouch.empty.description": "Can hold up to %s consumable items"
+}

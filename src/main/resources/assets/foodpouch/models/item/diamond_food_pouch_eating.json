@@ -1,0 +1,7 @@
+{
+  "parent": "foodpouch:item/diamond_food_pouch",
+  "textures": {
+    "layer0": "foodpouch:item/food_pouch_eating",
+    "layer1": "foodpouch:item/diamond_food_pouch_overlay_eating"
+  }
+}

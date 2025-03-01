@@ -1,6 +1,8 @@
 package com.skyveo.foodpouch;
 
 import com.mojang.logging.LogUtils;
+import com.skyveo.foodpouch.item.ModItems;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -32,6 +34,8 @@ public class FoodPouch {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
+        ModItems.register(modEventBus);
+
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
@@ -43,8 +47,14 @@ public class FoodPouch {
 
     }
 
-    // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ModItems.FOOD_POUCH);
+            event.accept(ModItems.IRON_FOOD_POUCH);
+            event.accept(ModItems.GOLDEN_FOOD_POUCH);
+            event.accept(ModItems.DIAMOND_FOOD_POUCH);
+            event.accept(ModItems.NETHERITE_FOOD_POUCH);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
