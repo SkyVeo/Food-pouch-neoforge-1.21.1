@@ -1,6 +1,7 @@
 package com.skyveo.foodpouch.item;
 
 import com.skyveo.foodpouch.FoodPouch;
+import com.skyveo.foodpouch.item.custom.FoodPouchItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -16,7 +17,7 @@ public class ModItems {
     public static final DeferredItem<Item> NETHERITE_FOOD_POUCH = registerFoodPouch("netherite_food_pouch", FoodPouchMaterials.NETHERITE);
 
     public static DeferredItem<Item> registerFoodPouch(String name, FoodPouchMaterial material) {
-        return ITEMS.register(name, () -> new Item(material.getProperties()));
+        return ITEMS.register(name, () -> new FoodPouchItem(material));
     }
 
     public static void register(IEventBus eventBus) {
