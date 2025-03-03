@@ -30,4 +30,8 @@ public class FoodPouchProcess {
                 && !(item instanceof FoodPouchItem)
                 && stack.has(DataComponents.FOOD);
     }
+
+    public static Optional<FoodPouchItem> getFoodPouchItem(ItemStack stack) {
+        return stack.getItem() instanceof FoodPouchItem foodPouchItem ? Optional.of(foodPouchItem) : Optional.empty();
+    }
 }

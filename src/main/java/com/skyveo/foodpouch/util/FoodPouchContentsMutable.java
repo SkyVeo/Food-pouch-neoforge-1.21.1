@@ -2,6 +2,7 @@ package com.skyveo.foodpouch.util;
 
 import com.skyveo.foodpouch.item.custom.FoodPouchItem;
 import com.skyveo.foodpouch.mixin.BundleContentsMutableAccessor;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +18,7 @@ import static com.skyveo.foodpouch.util.FoodPouchProcess.*;
 public class FoodPouchContentsMutable extends BundleContents.Mutable {
     protected final BundleContentsMutableAccessor accessor = (BundleContentsMutableAccessor) this;
     private final int maxSize;
+    private final ItemStack foodPouch;
 
     public static Optional<FoodPouchContentsMutable> of(ItemStack foodPouch) {
         Optional<BundleContents> content = getContentComponent(foodPouch);
@@ -24,12 +26,13 @@ public class FoodPouchContentsMutable extends BundleContents.Mutable {
         if (content.isEmpty() || !(foodPouch.getItem() instanceof FoodPouchItem foodPouchItem)) {
             return Optional.empty();
         }
-        return Optional.of(new FoodPouchContentsMutable(content.get(), foodPouchItem.getMaxSize()));
+        return Optional.of(new FoodPouchContentsMutable(content.get(), foodPouchItem.getMaxSize(), foodPouch));
     }
 
-    public FoodPouchContentsMutable(BundleContents contents, int maxSize) {
+    protected FoodPouchContentsMutable(BundleContents contents, int maxSize, ItemStack foodPouch) {
         super(contents);
         this.maxSize = maxSize;
+        this.foodPouch = foodPouch;
     }
 
     public int getMaxSize() {
@@ -91,5 +94,21 @@ public class FoodPouchContentsMutable extends BundleContents.Mutable {
     @Override
     public int tryTransfer(Slot slot, @NotNull Player player) {
         return tryInsert(slot.getItem());
+    }
+
+    protected void updateFoodPouchContents(ItemStack foodPouch) {
+        getFoodPouchItem(foodPouch).ifPresent(item -> {
+            ItemStack stack = item.getFirstFood(foodPouch);
+            if (stack.isEmpty()) {
+                foodPouch.remove(DataComponents.FOOD);
+            } else {
+                foodPouch.set(DataComponents.FOOD, stack.get(DataComponents.FOOD));
+            }
+        });
+    }
+
+    public void build() {
+        foodPouch.set(DataComponents.BUNDLE_CONTENTS, toImmutable());
+        updateFoodPouchContents(foodPouch);
     }
 }
